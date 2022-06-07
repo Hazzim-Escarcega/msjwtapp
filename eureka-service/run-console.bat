@@ -1,2 +1,2 @@
+title Eureka Server
 gradlew bootRun
-timeout /T 3600

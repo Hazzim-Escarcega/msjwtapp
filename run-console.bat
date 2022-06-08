@@ -1,19 +1,19 @@
-cd C:\Users\a844017\UPGRADE\microservices-jwt\config-service\
+cd config-service
 start cmd /k call run-console.bat
 timeout /t 10
 cd..
-cd C:\Users\a844017\UPGRADE\microservices-jwt\eureka-service\
+cd eureka-service
 start cmd /k call run-console.bat
 timeout /t 20
 cd..
-cd C:\Users\a844017\UPGRADE\microservices-jwt\bike-service\
+cd bike-service
 start cmd /k call run-console.bat
 timeout /t 15
 cd..
-cd C:\Users\a844017\UPGRADE\microservices-jwt\car-service\
+cd car-service
 start cmd /k call run-console.bat
 timeout /t 15
 cd..
-cd C:\Users\a844017\UPGRADE\microservices-jwt\user-service\
+cd user-service
 start cmd /k call run-console.bat
 exit

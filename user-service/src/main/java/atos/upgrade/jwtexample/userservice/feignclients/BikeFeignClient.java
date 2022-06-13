@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "bike-service", url = "http://localhost:3335")
+@FeignClient(name = "bike-service")
 public interface BikeFeignClient {
     @PostMapping("/bike/")
     Bike save (@RequestBody Bike bike);

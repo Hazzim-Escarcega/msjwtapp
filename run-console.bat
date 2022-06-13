@@ -1,3 +1,4 @@
+gradlew --stop
 cd config-service
 start cmd /k call run-console.bat
 timeout /t 15

@@ -4,6 +4,7 @@ import atos.upgrade.jwtexample.userservice.entity.AppUser;
 import atos.upgrade.jwtexample.userservice.model.Bike;
 import atos.upgrade.jwtexample.userservice.model.Car;
 import atos.upgrade.jwtexample.userservice.service.UserService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,7 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
+    @CircuitBreaker(name = "carsDB", fallbackMethod = "fallBackGetCars")
     @PostMapping("/")
     ResponseEntity<AppUser> save(@RequestBody AppUser user) {
         AppUser userNew = userService.save(user);

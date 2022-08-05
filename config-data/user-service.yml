@@ -15,7 +15,7 @@ spring:
   # DB
   # ===============================
   datasource:
-    url: jdbc:h2:mem:userDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:productDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driverClassName: org.h2.Driver
     platform: h2
     username: sa
@@ -40,14 +40,14 @@ logging:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8099/eureka/ 
+      defaultZone: http://localhost:8099/eureka/  
   instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} 
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 management:
   endpoints:
     web:
       exposure:
-        include: "*"    
+        include: "*"
 
     
 resilience4j.circuitbreaker:

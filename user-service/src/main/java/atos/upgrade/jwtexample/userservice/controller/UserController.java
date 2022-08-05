@@ -44,7 +44,7 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
-    @CircuitBreaker(name = "carsCB", fallbackMethod = "fallBackGetCars")
+    @CircuitBreaker(name = "carsCB", fallbackMethod = "fallbackGetCars")
     @GetMapping("/cars/{userId}")
     public ResponseEntity<List<Car>> getCars(@PathVariable("userId") Long userId) {
         AppUser user = userService.getUserById(userId);
@@ -53,7 +53,7 @@ public class UserController {
         }
         List<Car> cars = userService.getCars(userId);
         return ResponseEntity.ok(cars);
-    }@CircuitBreaker(name = "bikesCB", fallbackMethod = "fallBackGetBikes")
+    }@CircuitBreaker(name = "bikesCB", fallbackMethod = "fallbackGetBikes")
     @GetMapping("/bikes/{userId}")
     public ResponseEntity<List<Bike>> getBikes(@PathVariable("userId") Long userId) {
         AppUser user = userService.getUserById(userId);
@@ -63,7 +63,7 @@ public class UserController {
         List<Bike> bikes = userService.getBikes(userId);
         return ResponseEntity.ok(bikes);
     }
-    @CircuitBreaker(name = "carsCB", fallbackMethod = "fallBackSaveCars")
+    @CircuitBreaker(name = "carsCB", fallbackMethod = "fallbackSaveCars")
     @PostMapping("/savecar/{userId}")
     public ResponseEntity<Car> saveCar(@PathVariable("userId") Long userId, @RequestBody Car car) {
         if (userService.getUserById(userId) == null) {
@@ -72,7 +72,7 @@ public class UserController {
         Car carNew = userService.saveCar(userId, car);
         return ResponseEntity.ok(car);
     }
-    @CircuitBreaker(name = "bikesCB", fallbackMethod = "fallBackSaveBikes")
+    @CircuitBreaker(name = "bikesCB", fallbackMethod = "fallbackSaveBikes")
     @PostMapping("/savebike/{userId}")
     public ResponseEntity<Bike> saveBike(@PathVariable("userId") Long userId, @RequestBody Bike bike) {
         if (userService.getUserById(userId) == null) {
@@ -81,7 +81,7 @@ public class UserController {
         Bike bikeNew = userService.saveBike(userId, bike);
         return ResponseEntity.ok(bike);
     }
-    @CircuitBreaker(name = "allCB", fallbackMethod = "fallBackGetAll")
+    @CircuitBreaker(name = "allCB", fallbackMethod = "fallbackGetAll")
     @GetMapping("/getAll/{userId}")
     public ResponseEntity<Map<String, Object>> getAllVehicles(@PathVariable("userId") int userId) {
         Map<String, Object> result = userService.getUserAndVehicles(userId);

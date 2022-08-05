@@ -1,3 +1,5 @@
+start cmd /k java -jar zipkin-server-2.23.18-exec.jar
+timeout /t 10
 gradlew --stop
 cd config-service
 start cmd /k call run-console.bat

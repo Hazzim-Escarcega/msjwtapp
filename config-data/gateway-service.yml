@@ -1,14 +1,20 @@
 server:
   port: 8090
+  
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8099/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8099/eureka
   instance:
     hostname: localhost
+
 spring:
   cloud:
     gateway:
+      default-filters:
+        - TokenRelay
       discovery:
         locator:
           enabled: true
@@ -17,11 +23,30 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**
-        - id: bike-service
-          uri: lb://bike-service
-          predicates:
-            - Path=/bike/**
+          filters:
+            - RemoveRequestHeader=Cookie
         - id: car-service
           uri: lb://car-service
           predicates:
             - Path=/car/**
+        - id: bike-service
+          uri: lb://bike-service
+          predicates:
+            - Path=/bike/**
+
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            authorization-uri: http://localhost:8180/auth/realms/tutorial-realm/protocol/openid-connect/auth 
+            userinfo-uri: http://localhost:8180/auth/realms/tutorial-realm/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
+            token-uri: http://localhost:8180/auth/realms/tutorial-realm/protocol/openid-connect/token
+        registration:
+          tutorial-client:
+            provider: keycloak
+            client-id: tutorial-client
+            client-secret: e6dd896e-eae4-45d8-a673-6ee504362563
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/tutorial-client"

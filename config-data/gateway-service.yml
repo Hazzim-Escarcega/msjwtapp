@@ -1,20 +1,14 @@
 server:
   port: 8090
-  
 eureka:
   client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      default-zone: http://localhost:8099/eureka
+    serviceUrl:
+      defaultZone: http://localhost:8099/eureka/
   instance:
     hostname: localhost
-
 spring:
   cloud:
     gateway:
-      default-filters:
-        - TokenRelay
       discovery:
         locator:
           enabled: true
@@ -23,16 +17,14 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**
-          filters:
-            - RemoveRequestHeader=Cookie
-        - id: car-service
-          uri: lb://car-service
-          predicates:
-            - Path=/car/**
         - id: bike-service
           uri: lb://bike-service
           predicates:
             - Path=/bike/**
+        - id: car-service
+          uri: lb://car-service
+          predicates:
+            - Path=/car/** 
 
   security:
     oauth2:
